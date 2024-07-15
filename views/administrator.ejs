@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Admin Dashboard</title>
+
+    <!-- Montserrat Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+    <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./css/admin.css">
+    <style>
+        a {
+          text-decoration: none;
+          /* pointer-events: none; */
+          color: #ffffff;
+        }
+        a:hover{
+          color: #ffffff;
+        }
+
+        .header-left {
+          display: flex;
+          align-items: center;
+        }
+
+        .user-fullname {
+        font-size: 18px;
+        margin-right: 10px; /* Adjust as needed */
+      }
+      .user-role {
+        font-size: 18px;
+        color: grey; /* Optional: change the color as needed */
+      }
+      </style>
+  </head>
+  <body>
+    <div class="grid-container">
+
+      <!-- Header -->
+      <header class="header">
+        <div class="menu-icon" onclick="openSidebar()">
+          <span class="material-icons-outlined">menu</span>
+        </div>
+        <div class="header-left">
+          <span class="material-icons-outlined">person</span>
+          <p class="user-fullname"><a href="/view/<%= user._id %>"><%= user ? user.fullname : '' %></a></p>
+          <% if (sudo) { %>
+            <p class="user-role">(CEO)</p>
+          <% } else { %>
+            <p></p> <!-- Empty paragraph -->
+          <% } %>
+          
+         <% if (accountant) { %>
+            <p class="user-role">(Accountant)</p>
+          <% } else { %>
+            <p></p> <!-- Empty paragraph -->
+          <% } %>
+
+          <% if (manager) { %>
+            <p class="user-role">(General Manager)</p>
+          <% } else { %>
+              <p></p> <!-- Empty paragraph -->
+          <% } %>
+        </div>
+        <div class="header-right">
+          <span class="material-icons-outlined"><a href="#" class="header-top-social-link">
+            <img src="./images/sl.png" alt="Sierra Leone" style="width: 20px; height: 20px; border-radius: 50%;">
+          </a>
+        </span>
+          <span class="material-icons-outlined">notifications</span>
+          <span class="material-icons-outlined"><a href="/all-messages">chat</a></span>
+          <span class="material-icons-outlined"><a href="/view/<%= user._id %>">account_circle</a></span>
+          <span class="material-icons-outlined"><a href="/logout">logout</a></span>
+        </div>
+      </header>
+      <!-- End Header -->
+
+      <!-- Sidebar -->
+      <aside id="sidebar">
+        <div class="sidebar-title">
+          <div class="sidebar-brand">
+            <a href="/admin-home"><span class="material-icons-outlined">home</span> HOMEHUB </a>
+          </div>
+          <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
+        </div>
+
+        <ul class="sidebar-list">
+          <li class="sidebar-list-item">
+            <a href="/all-messages" target="_blank">
+              <span class="material-icons-outlined">chat</span> Messages
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="/all-apartments" target="_blank">
+              <span class="material-icons-outlined">home</span> Apartments
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="/all-applications" target="_blank">
+              <span class="material-icons-outlined">category</span> Applications
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="/all-admin-user" target="_blank">
+              <span class="material-icons-outlined">groups</span> Administrative
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="/verify-apartment" target="_blank">
+              <span class="material-icons-outlined">fact_check</span> Verification
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="/sponsorship" target="_blank">
+              <span class="material-icons-outlined">monetization_on</span> Sponsorship
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="/availability" target="_blank">
+              <span class="material-icons-outlined">event_available</span> Avaliability
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="/update-password/<%= user._id %>" target="_blank">
+              <span class="material-icons-outlined">settings</span> Settings
+            </a>
+          </li>
+        </ul>
+      </aside>
+      <!-- End Sidebar -->
+
+      <!-- Main -->
+      <main class="main-container">
+        <div class="main-title">
+          <h2>ADMIN DASHBOARD</h2>
+        </div>
+
+        <div class="main-cards">
+          <div class="card">
+            <a href="/all-apartments">
+            <div class="card-inner">
+              <h3>APARTMENTS</h3>
+              <span class="material-icons-outlined">home</span>
+            </div></a>
+            <!-- <h1>249</h1> -->
+            <h1><%= apartmentsCount %></h1>
+          </div>
+
+          
+          <div class="card">
+            <a href="/all-applications">
+            <div class="card-inner">
+              <h3>APPLICATIONS</h3>
+              <span class="material-icons-outlined">category</span>
+            </div></a>
+            <h1><%= applicationsCount %></h1>
+          </div>
+
+          <div class="card">
+            <a href="/all-users">
+            <div class="card-inner">
+              <h3>USERS</h3>
+              <span class="material-icons-outlined">groups</span>
+            </div></a>
+            <h1><%= usersCount %></h1>
+          </div>
+
+          <div class="card">
+            <a href="/account">
+            <div class="card-inner"> 
+              <h3>ACCOUNTS</h3>
+              <span class="material-icons-outlined">money</span>
+            </div></a>
+            <h1></h1>
+          </div>
+
+        </div>
+
+        <div class="charts">
+
+          <div class="charts-card">
+            <h2 class="chart-title">Top 5 Apartments</h2>
+            <div id="bar-chart"></div>
+          </div>
+
+          <div class="charts-card">
+            <h2 class="chart-title">Purchase and Sales Orders</h2>
+            <div id="area-chart"></div>
+          </div>
+
+        </div>
+      </main>
+      <!-- End Main -->
+
+    </div>
+
+    <!-- Scripts -->
+    <!-- ApexCharts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
+    <!-- Custom JS -->
+    <script src="./js/admin.js"></script>
+  </body>
+</html>

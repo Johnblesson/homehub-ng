@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apartment Form</title>
+  <link rel="stylesheet" href="./css/form.css">
+</head>
+<style>
+  .file-input-container {
+    display: grid;
+    grid-template-columns: 1fr; /* One column for vertical alignment */
+    gap: 10px; /* Adjust the gap between input elements */
+  }
+
+  .formbold-form-file {
+    /* Add your styling for file inputs here */
+    /* Example styles */
+    border: 1px solid #ccc;
+    padding: 8px;
+    width: 100%; /* Make inputs full width */
+    box-sizing: border-box; /* Ensure padding and border are included in width */
+  }
+</style>
+<body>
+<div class="formbold-main-wrapper">
+  <div class="formbold-form-wrapper">
+    <pre style="text-align: center; font: 0.6em sans-serif;">
+      Enter the complete details of your property. 
+      Make sure you input your correct informations, 
+      we will get back to you as soon as possible.
+    </pre>
+    <form action="/create-apartment" method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="aid" id="aid" class="formbold-form-input" />
+
+      <div class="formbold-mb-3">
+        <label for="title" class="formbold-form-label"> Title: </label>
+        <input type="text" name="title" id="title" placeholder="Title" class="formbold-form-input" />
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="typeOfProperty" class="formbold-form-label"> Type of Property: </label>
+        <select id="typeOfProperty" name="typeOfProperty" class="formbold-form-input">
+          <option value="" disabled selected hidden>Select Type</option>
+          <option value="Apartment">Apartment</option>
+          <option value="Land">Land</option>
+          <option value="Shop">Shop</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="price" class="formbold-form-label"> Price: </label>
+        <input type="number" name="price" id="price" placeholder="Price" class="formbold-form-input" />
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="status" class="formbold-form-label"> Status: </label>
+        <select id="status" name="status" class="formbold-form-input">
+          <option value="" disabled selected hidden>Select Status</option>
+          <option value="Sell">Sell</option>
+          <option value="Rent">Rent</option>
+          <option value="Lease">Lease</option>
+          <option value="Others">Others</option>
+        </select>
+      </div>
+
+      <div class="formbold-mb-3" id="durationField" style="display: none;">
+        <label for="duration" class="formbold-form-label"> Duration: </label>
+        <select id="duration" name="duration" class="formbold-form-input">
+          <option value="" disabled selected hidden>Select Duration</option>
+          <option value="/ Monthly">Monthly</option>
+          <option value="/ Yearly">Yearly</option>
+        </select>
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="currency" class="formbold-form-label"> Currency: </label>
+        <select id="currency" name="currency" class="formbold-form-input">
+          <option value="" disabled selected>Select your currency</option>
+          <option value="SLL">Sierra Leonean Leone (SLL)</option>
+          <option value="USD">United States Dollar (USD)</option>
+          <option value="GBP">British Pound Sterling (GBP)</option>
+        </select>
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="phone" class="formbold-form-label"> Phone: </label>
+        <input type="text" name="phone" id="phone" placeholder="Phone number" class="formbold-form-input" />
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="area" class="formbold-form-label"> Area: </label>
+        <select id="area" name="area" class="formbold-form-input">
+          <option value="" disabled selected hidden>Select Area</option>
+          <option value="Western Area Urban">Western Area Urban</option>
+          <option value="Western Area Rural">Western Area Rural</option>
+          <option value="Others">Others</option>
+        </select>
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="location" class="formbold-form-label"> Location: </label>
+        <input type="text" name="location" id="location" placeholder="Location" class="formbold-form-input" />
+      </div>
+
+      <div class="formbold-input-flex">
+        <div>
+          <label for="bedrooms" class="formbold-form-label"> Bedrooms: </label>
+          <input type="number" name="bedrooms" id="bedrooms" placeholder="Bedrooms" class="formbold-form-input" />
+        </div>
+        <div>
+          <label for="bathrooms" class="formbold-form-label"> Bathrooms: </label>
+          <input type="number" name="bathrooms" id="bathrooms" placeholder="Bathrooms" class="formbold-form-input" />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="negotiation" class="formbold-form-label"> Negotiation: </label>
+        <select id="negotiation" name="negotiation" class="formbold-form-input">
+          <option value="" disabled selected hidden>Select Negotiation</option>
+          <option value="Negotiable">Negotiable</option>
+          <option value="Non Negotiable">Non Negotiable</option>
+        </select>
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="address" class="formbold-form-label"> Address: </label>
+        <input type="text" name="address" id="address" placeholder="Enter Apartment Address" class="formbold-form-input" />
+        <input type="text" name="address2" id="address2" placeholder="Enter Landmark or Nearest Bus stop" class="formbold-form-input" />
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="createdBy" class="formbold-form-label"> Created By: </label>
+        <input type="text" name="createdBy" value="<%= user.fullname %>" class="formbold-form-input" readonly />
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="description" class="formbold-form-label"> Description: </label>
+        <textarea rows="6" name="description" id="description" class="formbold-form-input" placeholder="Decribe your property..."></textarea>
+      </div>
+
+      <div class="formbold-form-file-flex">
+        <!-- <label for="photo" class="formbold-form-label"> Upload Property Image </label> -->
+        <!-- <input type="file" name="photo" id="photo" class="formbold-form-file" multiple /> -->
+        <input type="file" name="photo" class="formbold-form-file" required>
+        <input type="file" name="photo1" class="formbold-form-file" required>
+        <input type="file" name="photo2" class="formbold-form-file" required>
+      </div>
+
+      <button type="submit" class="formbold-btn">Create Post</button>
+    </form>
+  </div>
+</div>
+<script>
+  document.getElementById('status').addEventListener('change', function() {
+    const durationField = document.getElementById('durationField');
+    durationField.style.display = this.value === 'Rent' ? 'block' : 'none';
+  });
+
+  document.querySelector('form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const formData = new FormData(this);
+
+    fetch('/create-apartment', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+  });
+</script>
+</body>
+</html>
