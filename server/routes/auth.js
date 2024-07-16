@@ -6,7 +6,7 @@ import { getLoginPage } from "../controllers/auth.js";
 import upload from "../upload/upload.js";
 import ensureAuthenticated from "../middlewares/auth.js";
 import { isAdmin } from "../middlewares/isAdmin.js";
-import { checkSudoMiddleware } from "../middlewares/sudo.js";
+// import { checkSudoMiddleware } from "../middlewares/sudo.js";
 import cacheMiddleware from "../middlewares/cacheMiddleware.js"
 import { checkManagerMiddleware } from '../middlewares/manager.js'
 
@@ -20,8 +20,8 @@ router.get("/login", cacheMiddleware, getLoginPage);
 
 router.get("/edit-user/:id", ensureAuthenticated, isAdmin, edituser);
 router.patch("/edit-user/:id", ensureAuthenticated, isAdmin, checkManagerMiddleware, updateUser)
-router.delete("/delete-user/:id", ensureAuthenticated, isAdmin, checkSudoMiddleware, deleteUser)
-router.get("/delete-user/:id", ensureAuthenticated, isAdmin, checkSudoMiddleware, deleteUser)
+router.delete("/delete-user/:id", ensureAuthenticated, isAdmin, checkManagerMiddleware, deleteUser)
+router.get("/delete-user/:id", ensureAuthenticated, isAdmin, checkManagerMiddleware, deleteUser)
 router.get("/update-password/:id", ensureAuthenticated, viewChangePwdPage)
 // router.get("/update-password-user/:id", ensureAuthenticated, viewChangePwdPageUser)
 router.patch("/update-password/:id", ensureAuthenticated, changePassword)
