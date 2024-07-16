@@ -20,13 +20,13 @@ router.get("/sell-properties", cacheMiddleware, ensureAuthenticated, );
 
 router.get("/rent-properties", cacheMiddleware, ensureAuthenticated, );
 
-router.get("/about", cacheMiddleware, cacheMiddleware, about);
+router.get("/about", cacheMiddleware, about);
 
-router.get("/features", cacheMiddleware, cacheMiddleware, features);
+router.get("/features", cacheMiddleware, features);
 
-router.get("/service", cacheMiddleware, cacheMiddleware, service);
+router.get("/service", cacheMiddleware, service);
 
-router.get("/blog", cacheMiddleware, cacheMiddleware, blog);
+router.get("/blog", cacheMiddleware, blog);
 
 router.get('/create-apartment', cacheMiddleware, ensureAuthenticated, getPostApartment)
 
