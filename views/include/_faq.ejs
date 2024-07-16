@@ -3,9 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="./css/faq.css">
-  <script src="./js/faq.js" defer></script>
   <title>FAQ</title>
+  <style>
+    .faq-toggle .fa-times {
+      display: none;
+    }
+
+    .faq.active .fa-chevron-down {
+      display: none;
+    }
+
+    .faq.active .fa-times {
+      display: inline;
+    }
+
+    .red {
+      color: red;
+      margin: 0 0.5rem;
+    }
+
+    .faq {
+      margin-bottom: 1rem;
+    }
+
+    .faq-title {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .faq-text {
+      display: none;
+      margin-bottom: 0.5rem;
+    }
+
+    .faq.active .faq-text {
+      display: block;
+    }
+
+    .faq-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+  </style>
 </head>
 <body>
   <h1>Frequently Asked Questions</h1>
@@ -19,7 +63,7 @@
       </p>
       <button class="faq-toggle">
         <i class="fas fa-chevron-down"></i>
-        <i class="fas fa-times"></i>
+        <i class="fas fa-times red"></i>
       </button>
     </div>
 
@@ -32,7 +76,7 @@
       </p>
       <button class="faq-toggle">
         <i class="fas fa-chevron-down"></i>
-        <i class="fas fa-times"></i>
+        <i class="fas fa-times red"></i>
       </button>
     </div>
     
@@ -45,7 +89,7 @@
       </p>
       <button class="faq-toggle">
         <i class="fas fa-chevron-down"></i>
-        <i class="fas fa-times"></i>
+        <i class="fas fa-times red"></i>
       </button>
     </div>
     
@@ -58,7 +102,7 @@
       </p>
       <button class="faq-toggle">
         <i class="fas fa-chevron-down"></i>
-        <i class="fas fa-times"></i>
+        <i class="fas fa-times red"></i>
       </button>
     </div>
     
@@ -71,7 +115,7 @@
       </p>
       <button class="faq-toggle">
         <i class="fas fa-chevron-down"></i>
-        <i class="fas fa-times"></i>
+        <i class="fas fa-times red"></i>
       </button>
     </div>
     
@@ -84,7 +128,7 @@
       </p>
       <button class="faq-toggle">
         <i class="fas fa-chevron-down"></i>
-        <i class="fas fa-times"></i>
+        <i class="fas fa-times red"></i>
       </button>
     </div>
 
@@ -97,7 +141,7 @@
       </p>
       <button class="faq-toggle">
         <i class="fas fa-chevron-down"></i>
-        <i class="fas fa-times"></i>
+        <i class="fas fa-times red"></i>
       </button>
     </div>
 
@@ -110,7 +154,7 @@
       </p>
       <button class="faq-toggle">
         <i class="fas fa-chevron-down"></i>
-        <i class="fas fa-times"></i>
+        <i class="fas fa-times red"></i>
       </button>
     </div>
 
@@ -123,7 +167,7 @@
       </p>
       <button class="faq-toggle">
         <i class="fas fa-chevron-down"></i>
-        <i class="fas fa-times"></i>
+        <i class="fas fa-times red"></i>
       </button>
     </div>
 
@@ -136,9 +180,20 @@
       </p>
       <button class="faq-toggle">
         <i class="fas fa-chevron-down"></i>
-        <i class="fas fa-times"></i>
+        <i class="fas fa-times red"></i>
       </button>
     </div>
   </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+  <script>
+    const toggles = document.querySelectorAll('.faq-toggle')
+
+    toggles.forEach(toggle => {
+      toggle.addEventListener('click', () => {
+        toggle.parentNode.classList.toggle('active')
+      })
+    })
+  </script>
 </body>
 </html>
