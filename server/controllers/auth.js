@@ -215,21 +215,21 @@ export const getAllUsers = async (req, res) => {
   };
 
    // Function to determine the time of the day
-const getTimeOfDay = () => {
-  const currentHour = new Date().getHours();
+// const getTimeOfDay = () => {
+//   const currentHour = new Date().getHours();
 
-  if (currentHour >= 5 && currentHour < 12) {
-    return 'Good Morning';
-  } else if (currentHour >= 12 && currentHour < 18) {
-    return 'Good Afternoon';
-  } else {
-    return 'Good Evening';
-  }
-};
+//   if (currentHour >= 5 && currentHour < 12) {
+//     return 'Good Morning';
+//   } else if (currentHour >= 12 && currentHour < 18) {
+//     return 'Good Afternoon';
+//   } else {
+//     return 'Good Evening';
+//   }
+// };
 
   try {
    // Determine the time of the day
-   const greeting = getTimeOfDay();
+  //  const greeting = getTimeOfDay();
 
     const page = parseInt(req.query.page) || 1; // Get the requested page number from the query parameter
     const limit = 15; // Number of entries per page
@@ -257,7 +257,7 @@ const getTimeOfDay = () => {
       data: users, 
       locals,
       user,
-      greeting,
+      // greeting,
       currentPage: page, 
       totalPages: totalPages,
     });
@@ -266,6 +266,8 @@ const getTimeOfDay = () => {
     res.status(500).send('An error occurred while fetching users.');
   }
 };
+
+
 
 // Get All Users Controller
 export const allAdminUser = async (req, res) => {
@@ -276,21 +278,21 @@ export const allAdminUser = async (req, res) => {
   };
 
    // Function to determine the time of the day
-const getTimeOfDay = () => {
-  const currentHour = new Date().getHours();
+// const getTimeOfDay = () => {
+//   const currentHour = new Date().getHours();
 
-  if (currentHour >= 5 && currentHour < 12) {
-    return 'Good Morning';
-  } else if (currentHour >= 12 && currentHour < 18) {
-    return 'Good Afternoon';
-  } else {
-    return 'Good Evening';
-  }
-};
+//   if (currentHour >= 5 && currentHour < 12) {
+//     return 'Good Morning';
+//   } else if (currentHour >= 12 && currentHour < 18) {
+//     return 'Good Afternoon';
+//   } else {
+//     return 'Good Evening';
+//   }
+// };
 
   try {
    // Determine the time of the day
-   const greeting = getTimeOfDay();
+  //  const greeting = getTimeOfDay();
 
     const page = parseInt(req.query.page) || 1; // Get the requested page number from the query parameter
     const limit = 15; // Number of entries per page
@@ -318,7 +320,7 @@ const getTimeOfDay = () => {
       data: users, 
       locals,
       user,
-      greeting,
+      // greeting,
       currentPage: page, 
       totalPages: totalPages,
     });
@@ -327,6 +329,14 @@ const getTimeOfDay = () => {
     res.status(500).send('An error occurred while fetching users.');
   }
 };
+
+// Only role === user
+
+
+// Only role === admin
+
+
+// Only role === agent
 
 
 // Get

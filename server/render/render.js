@@ -17,6 +17,8 @@ export const homeRoute = async (req, res) => {
   };
 
   try {
+    const usersCount = await User.countDocuments();
+
     const apts = await Apartments.findOne({ _id: req.params.id });
      // Find all verified apartments and sort them by sponsored status and createdAt timestamp in descending order
      const apartments = await Apartments.find({ verification: 'verified' }).sort({ sponsored: -1, createdAt: -1 });
@@ -41,6 +43,7 @@ export const homeRoute = async (req, res) => {
       user,
       apts,
       role,
+      usersCount,
     });
   } catch (error) {
     console.error(error);

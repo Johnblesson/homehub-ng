@@ -37,7 +37,7 @@ export const createApplication = async (req, res) => {
 };
 
 
-// Get All Users Controller
+// Get all applications controller
 export const getAllApplication = async (req, res) => {
 
   try {
@@ -139,7 +139,7 @@ export const deleteApplication = async (req, res) => {
 };
 
 
-// Get application by ID
+// Get application
 export const application = async (req, res) => {
 
   // Function to determine the time of the day

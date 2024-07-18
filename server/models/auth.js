@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
     bio: String, // Bio is not required by default, so no need to specify required property
     role: {
         type: String,
-        enum: ['admin', 'user'],
+        enum: ['admin', 'user', 'agent'],
         default: 'user',
     },
     status: {

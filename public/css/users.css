@@ -169,6 +169,10 @@ h2{
         background-color: rgb(249, 233, 7);
     }
 
+    .role-sky-blue-bg {
+        background-color: skyblue;
+    }
+
     .status-red-bg {
         background-color: rgb(255, 5, 5);
     }
