@@ -193,14 +193,28 @@
       </div>
 
       <div class="formbold-input-flex">
-        <div>
+        <!-- <div>
           <label for="sudo" class="formbold-form-label"> Sudo: </label>
           <select id="sudo" class="formbold-form-input" name="sudo">
             <option value="" disabled selected hidden>Select Options</option>
             <option value="false">False</option>
             <option value="true">True</option>
         </select>
+        </div> -->
+
+        <!-- <div>
+          <label for="password" class="formbold-form-label">Password: </label>
+          <input type="password" id="password" class="formbold-form-input" placeholder="Enter password">
         </div>
+        
+        <div>
+          <label for="sudo" class="formbold-form-label"> Sudo: </label>
+          <select id="sudo" class="formbold-form-input" name="sudo" disabled>
+            <option value="" disabled selected hidden>Select Options</option>
+            <option value="false">False</option>
+            <option value="true">True</option>
+          </select>
+        </div> -->
 
         <div>
           <label for="accountant" class="formbold-form-label"> Accountant: </label>
@@ -240,9 +254,19 @@
     </form>
   </div>
 </div>
-<style>
- 
-</style>
+<!-- <script>
+  document.getElementById('password').addEventListener('input', function() {
+    const passwordField = document.getElementById('password');
+    const sudoField = document.getElementById('sudo');
+    const correctPassword = '123456'; // Set your password here
+
+    if (passwordField.value === correctPassword) {
+      sudoField.removeAttribute('disabled');
+    } else {
+      sudoField.setAttribute('disabled', 'disabled');
+    }
+  });
+</script> -->
 
 </body>
 </html>
