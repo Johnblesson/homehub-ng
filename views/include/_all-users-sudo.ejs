@@ -109,7 +109,7 @@
                 <th>Email</th>
                 <th>Role</th>
                 <th>Sudo</th>
-                <th>G. Manager</th>
+                <th>Director</th>
                 <th>Accountant</th>
                 <th>Status</th>
                 <th>Actions</th> <!-- New column for actions -->
@@ -122,7 +122,7 @@
                 <td class="hover"><%= user.username %></td>
                 <td class="hover"><%= user.phone %></td>
                 <td class="hover"><%= user.email %></td>
-                <td class="hover <%= user.role === 'admin' ? 'role-pink-bg' : (user.role === 'user' ? 'role-green-bg' : '') %>"><%= user.role %></td>
+                <td class="hover <%= user.role === 'admin' ? 'role-pink-bg' : (user.role === 'user' ? 'role-green-bg' : (user.role === 'agent' ? 'role-sky-blue-bg' : '')) %>"><%= user.role %></td>
                 <td class="hover"><%= user.sudo %></td>
                 <td class="hover"><%= user.manager %></td>
                 <td class="hover"><%= user.accountant %></td>

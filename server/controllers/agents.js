@@ -78,6 +78,59 @@ export const agentForm = async (req, res) => {
     }
   };
 
+
+    // Get agent form
+  // GET /agents
+
+export const agentFormAdmin = async (req, res) => {
+
+  // Function to determine the time of the day
+  const getTimeOfDay = () => {
+    const currentHour = new Date().getHours();
+
+    if (currentHour >= 5 && currentHour < 12) {
+      return 'Good Morning';
+    } else if (currentHour >= 12 && currentHour < 18) {
+      return 'Good Afternoon';
+    } else {
+      return 'Good Evening';
+    }
+  };
+
+  try {
+
+    // Determine the time of the day
+    const greeting = getTimeOfDay();
+
+    // Check if the user is authenticated
+    const user = req.isAuthenticated() ? req.user : null;
+
+    const role = user.role;
+
+     // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
+     const sudo = user && user.sudo ? user.sudo : false;
+
+     // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
+     const accountant = user && user.accountant ? user.accountant : false;
+
+     // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
+     const manager = user && user.manager ? user.manager : false;
+
+    // Render the apply page with the necessary data
+    res.render('apply-agent-form-admin', {
+      user,
+      greeting,
+      role,
+      sudo,
+      accountant,
+      manager
+    });
+  } catch (error) {
+    console.error('Error rendering the page:', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
+
 // Get All Agents Controller
 export const agentProgram = async (req, res) => {
 

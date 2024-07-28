@@ -38,6 +38,18 @@
         font-size: 18px;
         color: grey; /* Optional: change the color as needed */
       }
+
+      /* Hide specific icons on mobile view */
+      @media (max-width: 768px) {
+        .header-right .material-icons-outlined {
+          display: none;
+        }
+
+        .header-right a {
+          display: none;
+        }
+      }
+
       </style>
   </head>
   <body>
@@ -64,7 +76,7 @@
           <% } %>
 
           <% if (manager) { %>
-            <p class="user-role">(General Manager)</p>
+            <p class="user-role">(Managing Director)</p>
           <% } else { %>
               <p></p> <!-- Empty paragraph -->
           <% } %>
