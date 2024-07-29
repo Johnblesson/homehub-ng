@@ -10,6 +10,7 @@ import { dirname } from 'path';
 import session from 'express-session';
 import flash from 'connect-flash';
 import cookieParser from 'cookie-parser';
+// import webpush from 'web-push';
 import methodOverride from 'method-override';
 import passport from './server/passport/passport-config.js';
 import connectDB from './server/database/connection.js';
@@ -72,6 +73,20 @@ app.use(methodOverride('_method'));
 // app.use((err, req, res, next) => {
 //   console.error(err.stack);
 //   res.status(500).send('Something went wrong!');
+// });
+
+
+// const publicVapidKey = "BPbBx_r7-40UPTOMg54tsehbJeu_FIOmOm5QVFev8ox2HkOr7yNNz8IeFPdhwpJqbAj9Pgyj0MN_Zaeu9liIyEw";
+// const privateVapidKey = "fl3GCcBHVGEJLJWtn4Plw2FfIpVMs0ZTNyHb_fRqzwk";
+
+// webpush.setVapidDetails('mailto:johnblessonrowe@gmail.com', publicVapidKey, privateVapidKey);
+
+// let subscriptions = [];
+
+// app.post('/subscribe', (req, res) => {
+//   const subscription = req.body;
+//   subscriptions.push(subscription);
+//   res.status(201).json({});
 // });
 
 // Use the viewRoutes
