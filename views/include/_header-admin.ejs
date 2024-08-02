@@ -38,6 +38,10 @@
         document.addEventListener('DOMContentLoaded', (event) => {
             const socket = io();
 
+            // Register user ID with the server
+            const userId = '<%= userId %>'; // This should be dynamically set based on the logged-in user
+            socket.emit('register', userId);
+
             socket.on('new-apartment', (data) => {
                 alert(`New apartment created: ${data.title} at ${data.location}`);
             });
