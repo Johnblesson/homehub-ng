@@ -1,15 +1,128 @@
+// import express from 'express';
+// import mongoose from 'mongoose';
+// const app = express();
+// import User from '../models/auth.js';
+// import { body, validationResult } from 'express-validator';
+// // import passport from 'passport';
+// import bcrypt from 'bcrypt';
+// import jwt from 'jsonwebtoken';
+// import passport from '../passport/passport-config.js';
+// import dotenv from 'dotenv';
+// import axios from 'axios';
+// dotenv.config();
+
+// // Sign Up Controller
+// export const signUp = async (req, res) => {
+//   // Validation checks
+//   const errors = validationResult(req);
+//   if (!errors.isEmpty()) {
+//       return res.status(400).json({ errors: errors.array() });
+//   }
+
+//   req.session = req.session || {};
+
+//   // Create a session
+//   req.session.user = {
+//       // Other user information
+//       isSignUp: true,
+//       isLogin: true,
+//   };
+
+//   try {
+//       const saltRounds = 10;
+//       const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
+
+//        // Check if req.file exists and has a value
+//     if (!req.file) {
+//       return res.status(400).json({ error: 'No file uploaded' });
+//     }
+
+//     // Log req.file to ensure it contains the file information
+//     // console.log('Uploaded file:', req.file);
+
+//     // Check if req.file.location contains the S3 URL
+//     if (!req.file.location) {
+//       return res.status(400).json({ error: 'File location not found' });
+//     }
+
+//     // Log req.file.location to ensure it contains the S3 URL
+//     // console.log('File location:', req.file.location);
+
+//       // Create a new User object with form data
+//       const userData = new User({
+//           fullname: req.body.fullname,
+//           username: req.body.username,
+//           email: req.body.email,
+//           phone: req.body.phone,
+//           bio: req.body.bio,
+//           password: hashedPassword,
+//           // photo: req.file ? req.file.path : '', // Store the file path if file exists
+//           photo:  req.file.location, // Use S3 URL
+//           role: req.body.role,
+//           status: req.body.status,
+//           sudo: req.body.sudo,
+//           accountant: req.body.accountant,
+//           manager: req.body.manager,
+//           // termsConditions: req.body.termsConditions,
+//           // serviceFee: req.body.serviceFee,
+//           // privacyPolicy: req.body.privacyPolicy,
+//           createdAt: new Date(), // Assuming createdAt and updatedAt are Date objects
+//           updatedAt: new Date()
+//       });
+
+//       // Check for duplicate usernames
+//       const existingUser = await User.findOne({ username: userData.username });
+//       if (existingUser) {
+//           return res.status(400).json({ error: 'Username is already taken' });
+//       }
+
+//       // Ensure the password contains at least one uppercase letter, one lowercase letter, and is at least 6 characters long
+//       if (!/^(?=.*[a-z])(?=.*[A-Z]).{6,}$/.test(req.body.password)) {
+//           return res.status(400).json({
+//               error: 'Password must be at least 6 characters long and contain both uppercase and lowercase letters.',
+//           });
+//       }
+
+//       // Save user data to the database
+//       const savedData = await userData.save();
+//       console.log(savedData);
+//       res.redirect('/login'); // Redirect to homepage after successful signup
+//       // res.status(201).json({ message: 'Signed up successfully' });
+//   } catch (error) {
+//       console.error(error);
+//       res.status(500).send('An error occurred while signing up.');
+//   }
+// };
+
+
 import express from 'express';
 import mongoose from 'mongoose';
-const app = express();
 import User from '../models/auth.js';
 import { body, validationResult } from 'express-validator';
-// import passport from 'passport';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import passport from '../passport/passport-config.js';
 import dotenv from 'dotenv';
 import axios from 'axios';
+import http from 'http';
+import { Server } from 'socket.io';
+// import signUp from './controllers/auth.js'; // Ensure you have the correct path
+
 dotenv.config();
+
+const app = express();
+const server = http.createServer(app);
+const io = new Server(server);
+
+// Your middleware, routes, and other configurations
+
+// Socket.io connection
+io.on('connection', (socket) => {
+  console.log('A user connected');
+  socket.on('disconnect', () => {
+    console.log('A user disconnected');
+  });
+});
 
 // Sign Up Controller
 export const signUp = async (req, res) => {
@@ -86,6 +199,10 @@ export const signUp = async (req, res) => {
       // Save user data to the database
       const savedData = await userData.save();
       console.log(savedData);
+      
+      // Emit a new signup notification to all connected clients
+      io.emit('new-signup', { username: savedData.username });
+
       res.redirect('/login'); // Redirect to homepage after successful signup
       // res.status(201).json({ message: 'Signed up successfully' });
   } catch (error) {
@@ -93,6 +210,12 @@ export const signUp = async (req, res) => {
       res.status(500).send('An error occurred while signing up.');
   }
 };
+
+
+
+
+
+
 
 
 // Google Oauth
