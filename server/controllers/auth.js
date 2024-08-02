@@ -103,7 +103,53 @@ export const googleAuthCallback = passport.authenticate('google', {
   successRedirect: '/'
 });
 
-  // Login Controller
+//   // Login Controller
+// export const logIn = (req, res, next) => {
+//   passport.authenticate('local', async (err, user, info) => {
+//     try {
+//       if (err) {
+//         return next(err);
+//       }
+
+//       if (!user) {
+//         return res.status(400).json({ msg: info.message });
+//       }
+
+//       // Check if user status is active
+//       if (user.status === 'active') {
+//         // User is active, proceed with login
+//         req.login(user, async (loginErr) => {
+//           if (loginErr) {
+//             return next(loginErr);
+//           }
+
+//           // Create a JWT token
+//           const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '24h' });
+//           delete user.password;
+//           req.session.user = user;
+//           console.log(token);
+//           res.cookie('token', token, { httpOnly: true });
+
+//           // Check the role and render different views
+//           if (user.role === 'admin') {
+//             res.redirect('/admin-home');
+//           } else if (user.role === 'user') {
+//             res.redirect('/home');
+//           } else {
+//             res.redirect('/home');
+//           }
+//         });
+//       } else {
+//         // User status is inactive, send forbidden response
+//         res.status(403).json({ msg: 'Forbidden: User status is inactive.' });
+//       }
+//     } catch (catchErr) {
+//       res.status(500).json({ error: catchErr.message });
+//     }
+//   })(req, res, next);
+// };
+
+
 export const logIn = (req, res, next) => {
   passport.authenticate('local', async (err, user, info) => {
     try {
@@ -124,20 +170,23 @@ export const logIn = (req, res, next) => {
           }
 
           // Create a JWT token
-          const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '24hrs' });
-          delete user.password;
-          req.session.user = user;
+          const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '24h' });
+          delete user.password; // Remove password from user object
+          req.session.user = user; // Store user in session
           console.log(token);
-          res.cookie('token', token, { httpOnly: true });
-
-          // Check the role and render different views
+          
+          // Prepare the redirect URL with the JWT as a query parameter
+          let redirectUrl = '';
           if (user.role === 'admin') {
-            res.redirect('/admin-home');
+            redirectUrl = `/admin-home?token=${token}`;
           } else if (user.role === 'user') {
-            res.redirect('/home');
+            redirectUrl = `/home?token=${token}`;
           } else {
-            res.redirect('/home');
+            redirectUrl = `/home?token=${token}`;
           }
+
+          // Redirect the user with the JWT in the URL
+          res.redirect(redirectUrl);
         });
       } else {
         // User status is inactive, send forbidden response
@@ -148,6 +197,7 @@ export const logIn = (req, res, next) => {
     }
   })(req, res, next);
 };
+
 
 
 // Get Login Page Controller

@@ -212,6 +212,26 @@
       }
   }
 </script>
+<script>
+  // Function to get the query parameter by name
+function getQueryParam(param) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(param);
+}
+
+// Get the token from the URL
+const token = getQueryParam('token');
+
+if (token) {
+  // Do something with the token, e.g., store it in local storage or send it with future requests
+  localStorage.setItem('token', token);
+
+  // Optionally, remove the token from the URL
+  const newUrl = window.location.pathname;
+  window.history.replaceState({}, document.title, newUrl);
+}
+
+</script>
 </body>
 
 </html> 
