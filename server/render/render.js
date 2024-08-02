@@ -51,66 +51,6 @@ export const homeRoute = async (req, res) => {
   }
 };
 
-// // Admin Home Route
-// export const adminHomeRoute = async (req, res) => {
-//   const getTimeOfDay = () => {
-//     const currentHour = new Date().getHours();
-
-//     if (currentHour >= 5 && currentHour < 12) {
-//       return 'Good Morning';
-//     } else if (currentHour >= 12 && currentHour < 18) {
-//       return 'Good Afternoon';
-//     } else {
-//       return 'Good Evening';
-//     }
-//   };
-
-//   try {
-//     const apts = await Apartments.findOne({ _id: req.params.id });
-//     // Find all verified apartments and sort them by sponsored status and createdAt timestamp in descending order
-//     const apartments = await Apartments.find({ verification: 'verified' }).sort({ sponsored: -1, createdAt: -1 });
-
-//     const greeting = getTimeOfDay();
-//     const user = req.isAuthenticated() ? req.user : null;
-//     const role = user ? user.role : null; // Get user role if user is authenticated
-
-//     // Process each apartment to set photoUrl, formattedCreatedAt, and daysAgo
-//     apartments.forEach(apartment => {
-//       // Ensure photoUrl is set properly
-//       apartment.photoUrl = apartment.photo || ''; // Use empty string if no photo is available
-
-//       // Format the createdAt date and calculate days ago
-//       apartment.formattedCreatedAt = moment(apartment.createdAt).format('DD-MM-YYYY HH:mm');
-//       apartment.daysAgo = moment().diff(moment(apartment.createdAt), 'days');
-//     });
-
-//     // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
-//     const sudo = user && user.sudo ? user.sudo : false;
-
-//     // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
-//     const accountant = user && user.accountant ? user.accountant : false;
-
-//     // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
-//     const manager = user && user.manager ? user.manager : false;
-
-//     res.render("index-admin", {
-//       apartments,
-//       greeting,
-//       user,
-//       role,
-//       apts,
-//       sudo,
-//       accountant,
-//       manager,
-//     });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).send("An error occurred while fetching apartments.");
-//   }
-// };
-
-
-
 // Admin Home Route
 export const adminHomeRoute = async (req, res) => {
   const getTimeOfDay = () => {
@@ -127,20 +67,30 @@ export const adminHomeRoute = async (req, res) => {
 
   try {
     const apts = await Apartments.findOne({ _id: req.params.id });
+    // Find all verified apartments and sort them by sponsored status and createdAt timestamp in descending order
     const apartments = await Apartments.find({ verification: 'verified' }).sort({ sponsored: -1, createdAt: -1 });
 
     const greeting = getTimeOfDay();
     const user = req.isAuthenticated() ? req.user : null;
-    const role = user ? user.role : null;
+    const role = user ? user.role : null; // Get user role if user is authenticated
 
+    // Process each apartment to set photoUrl, formattedCreatedAt, and daysAgo
     apartments.forEach(apartment => {
-      apartment.photoUrl = apartment.photo || '';
+      // Ensure photoUrl is set properly
+      apartment.photoUrl = apartment.photo || ''; // Use empty string if no photo is available
+
+      // Format the createdAt date and calculate days ago
       apartment.formattedCreatedAt = moment(apartment.createdAt).format('DD-MM-YYYY HH:mm');
       apartment.daysAgo = moment().diff(moment(apartment.createdAt), 'days');
     });
 
+    // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
     const sudo = user && user.sudo ? user.sudo : false;
+
+    // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
     const accountant = user && user.accountant ? user.accountant : false;
+
+    // Fetch user data from the session or request object (assuming req.user is set by the authentication middleware)
     const manager = user && user.manager ? user.manager : false;
 
     res.render("index-admin", {
@@ -152,15 +102,12 @@ export const adminHomeRoute = async (req, res) => {
       sudo,
       accountant,
       manager,
-      userId: user ? user._id : null // Pass userId to the template
     });
   } catch (error) {
     console.error(error);
     res.status(500).send("An error occurred while fetching apartments.");
   }
 };
-
-
 
 
   // Post Apartment

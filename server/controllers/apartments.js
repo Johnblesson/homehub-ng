@@ -173,7 +173,7 @@ import Apartments from '../models/apartments.js';
 import User from '../models/auth.js';
 import moment from 'moment';
 import mongoose from 'mongoose';
-import { io, connectedUsers } from '../../server.js'; // Import the io instance and connectedUsers
+import { io } from '../../server.js'; // Import the io instance
 
 // Controller function to create a new apartment
 export const createApartment = async (req, res) => {
@@ -235,12 +235,8 @@ export const createApartment = async (req, res) => {
 
     const savedApartment = await apartmentData.save();
 
-    // Emit a new apartment notification to all connected clients except the creator
-    for (const [id, socketId] of Object.entries(connectedUsers)) {
-      if (id !== userId.toString()) {
-        io.to(socketId).emit('new-apartment', { title: savedApartment.title, location: savedApartment.location });
-      }
-    }
+    // Emit a new apartment notification to all connected clients
+    io.emit('new-apartment', { title: savedApartment.title, location: savedApartment.location });
 
     if (user.role === 'admin') {
       res.redirect('/admin-apartment-success');
@@ -254,6 +250,7 @@ export const createApartment = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+
 
 
 
