@@ -1,7 +1,95 @@
+// import Apartments from '../models/apartments.js';
+// import User from '../models/auth.js';
+// import moment from 'moment';
+// import mongoose from 'mongoose';
+
+// // Controller function to create a new apartment
+// export const createApartment = async (req, res) => {
+//   try {
+//     // Check if all three required files are uploaded
+//     if (!req.files || !req.files.photo || !req.files.photo[0] || !req.files.photo1 || !req.files.photo1[0] || !req.files.photo2 || !req.files.photo2[0]) {
+//       return res.status(400).json({ error: 'All three photos are required' });
+//     }
+
+//     // Log req.files to ensure it contains the file information
+//     console.log('Uploaded files:', req.files);
+
+//     const photo = req.files.photo[0];
+//     const photo1 = req.files.photo1[0];
+//     const photo2 = req.files.photo2[0];
+
+//     // Check if files contain the location
+//     if (!photo.location || !photo1.location || !photo2.location) {
+//       return res.status(400).json({ error: 'File locations not found' });
+//     }
+
+//     // Log file locations to ensure they contain the S3 URLs
+//     console.log('File locations:', photo.location, photo1.location, photo2.location);
+
+//     // Find the user by username or email (assuming req.body.createdBy is the username or email)
+//     // const user = await User.findOne({ username: req.body.createdBy });
+//     // if (!user) {
+//     //   return res.status(404).json({ error: 'User not found' });
+//     // }
+
+//     const userId = req.user._id; // Assuming you have user info in req.user from authentication middleware
+
+//     const user = await User.find();
+
+//     const durationSlashes = req.body.duration;
+
+//     // Create a new Apartments object with form data
+//     const apartmentData = new Apartments({
+//       aid: req.body.aid,
+//       title: req.body.title,
+//       location: req.body.location,
+//       price: req.body.price,
+//       duration: durationSlashes, 
+//       currency: req.body.currency, 
+//       typeOfProperty: req.body.typeOfProperty,
+//       status: req.body.status,
+//       bedrooms: req.body.bedrooms,
+//       bathrooms: req.body.bathrooms,
+//       description: req.body.description,
+//       photo: photo.location, // Use S3 URL
+//       photo1: photo1.location, // Use S3 URL
+//       photo2: photo2.location, // Use S3 URL
+//       phone: req.body.phone,
+//       area: req.body.area,
+//       address: req.body.address,
+//       address2: req.body.address2,
+//       negotiation: req.body.negotiation,
+//       availabilty: req.body.availabilty,
+//       verification: req.body.verification,
+//       sponsored: req.body.sponsored,
+//       createdBy: req.body.createdBy,
+//       user: userId,
+//       createdAt: new Date(), // Assuming createdAt and updatedAt are Date objects
+//       updatedAt: new Date()
+//     });
+
+//     const savedApartment = await apartmentData.save();
+
+//     if (user.role === 'admin') {
+//       res.redirect('/admin-apartment-success');
+//     } else if (user.role === 'user') {
+//       res.redirect('/apartment-success');
+//     } else {
+//       res.redirect('/apartment-success');
+//     }
+//     console.log(savedApartment);
+//   } catch (error) {
+//     res.status(400).json({ error: error.message });
+//   }
+// };
+
+
+
 import Apartments from '../models/apartments.js';
 import User from '../models/auth.js';
 import moment from 'moment';
 import mongoose from 'mongoose';
+import { io } from '../../server.js'; // Import the io instance
 
 // Controller function to create a new apartment
 export const createApartment = async (req, res) => {
@@ -26,15 +114,8 @@ export const createApartment = async (req, res) => {
     // Log file locations to ensure they contain the S3 URLs
     console.log('File locations:', photo.location, photo1.location, photo2.location);
 
-    // Find the user by username or email (assuming req.body.createdBy is the username or email)
-    // const user = await User.findOne({ username: req.body.createdBy });
-    // if (!user) {
-    //   return res.status(404).json({ error: 'User not found' });
-    // }
-
     const userId = req.user._id; // Assuming you have user info in req.user from authentication middleware
-
-    const user = await User.find();
+    const user = await User.findById(userId); // Assuming user is found by ID
 
     const durationSlashes = req.body.duration;
 
@@ -70,6 +151,9 @@ export const createApartment = async (req, res) => {
 
     const savedApartment = await apartmentData.save();
 
+    // Emit a new apartment notification to all connected clients
+    io.emit('new-apartment', { title: savedApartment.title, location: savedApartment.location });
+
     if (user.role === 'admin') {
       res.redirect('/admin-apartment-success');
     } else if (user.role === 'user') {
@@ -82,6 +166,8 @@ export const createApartment = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+
+
 
 
 
