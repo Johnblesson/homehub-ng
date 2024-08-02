@@ -228,9 +228,7 @@
   <main>
     <article>
 
-<!-- 
-        - #HERO
-      -->
+<!-- #HERO -->
 
       <section class="hero" id="home">
         <div class="container">
@@ -260,6 +258,9 @@
 
         </div>
       </section> 
+
+      
+       
   
  <!-- 
         - #ABOUT
@@ -332,7 +333,9 @@
     </div>
   </section>
   
-  
+  <!-- include blog -->
+  <%- include('include/_blog-guest', { apartments: apartments }) %>
+  <!-- /include blog -->
   
    <!-- 
         - #SERVICE
@@ -429,14 +432,9 @@
       </section>
        
 
-   <!-- 
-        - #FEATURES
-      -->
+   <!-- #FEATURES -->
 
-  
-  <!-- include blog -->
-  <%- include('include/_blog-guest', { apartments: apartments }) %>
-  <!-- /include blog -->
+
   
   <section class="cta">
     <div class="container">

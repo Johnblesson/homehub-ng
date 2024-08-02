@@ -14,6 +14,7 @@ export const profile = async (req, res) => {
       users.photoUrl = users.photo; // Set photoUrl to the value of photo
     }
 
+    
     const user = req.isAuthenticated() ? req.user : null;
 
     const locals = {
