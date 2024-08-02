@@ -32,6 +32,17 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Poppins:wght@400;500;600;700&display=swap"
     rel="stylesheet">
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const socket = io();
+
+            socket.on('new-signup', (data) => {
+                alert(`New signup: ${data.username}`);
+            });
+        });
+    </script>
 </head>
 
 <body>

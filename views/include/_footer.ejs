@@ -232,17 +232,6 @@ if (token) {
 }
 
 </script>
-
-<script src="/socket.io/socket.io.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            const socket = io();
-
-            socket.on('new-signup', (data) => {
-                alert(`New signup: ${data.username}`);
-            });
-        });
-    </script>
 </body>
 
 </html> 
