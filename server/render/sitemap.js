@@ -1,125 +1,49 @@
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-   <url>
-      <loc>https://www.homehubng.com/</loc>
-      <changefreq>daily</changefreq>
-      <priority>1.0</priority>
-   </url>
-   <url>
-      <loc>https://www.homehubng.com/about-us</loc>
-      <changefreq>monthly</changefreq>
-      <priority>0.8</priority>
-   </url>
-   <url>
-      <loc>https://www.homehubng.com/about-us/leading-real-estate-marketplace</loc>
-      <changefreq>monthly</changefreq>
-      <priority>0.8</priority>
-   </url>
-   <url>
-      <loc>https://www.homehubng.com/about-us/our-mission</loc>
-      <changefreq>monthly</changefreq>
-      <priority>0.8</priority>
-   </url>
-   <url>
-      <loc>https://www.homehubng.com/about-us/our-team</loc>
-      <changefreq>monthly</changefreq>
-      <priority>0.8</priority>
-   </url>
-   <url>
-      <loc>https://www.homehubng.com/services</loc>
-      <changefreq>weekly</changefreq>
-      <priority>0.9</priority>
-   </url>
-   <url>
-      <loc>https://www.homehubng.com/services/sell-your-home</loc>
-      <changefreq>weekly</changefreq>
-      <priority>0.9</priority>
-   </url>
-   <url>
-      <loc>https://www.homehubng.com/services/sell-your-home/market-expertise</loc>
-      <changefreq>weekly</changefreq>
-      <priority>0.9</priority>
-   </url>
-   <url>
-      <loc>https://www.homehubng.com/services/sell-your-home/innovative-strategies</loc>
-      <changefreq>weekly</changefreq>
-      <priority>0.9</priority>
-   </url>
-   <url>
-      <loc>https://www.homehubng.com/services/rent-a-home</loc>
-      <changefreq>weekly</changefreq>
-      <priority>0.9</priority>
-   </url>
-   <url>
-      <loc>https://www.homehubng.com/services/rent-a-home/property-listings</loc>
-      <changefreq>weekly</changefreq>
-      <priority>0.9</priority>
-   </url>
-   <url>
-      <loc>https://www.homehubng.com/services/rent-a-home/lifestyle-budget-matching</loc>
-      <changefreq>weekly</changefreq>
-      <priority>0.9</priority>
-   </url>
-   <url>
-      <loc>https://www.homehubng.com/services/buy-a-home</loc>
-      <changefreq>weekly</changefreq>
-      <priority>0.9</priority>
-   </url>
-   <url>
-      <loc>https://www.homehubng.com/services/buy-a-home/property-search</loc>
-      <changefreq>weekly</changefreq>
-      <priority>0.9</priority>
-   </url>
-   <url>
-      <loc>https://www.homehubng.com/services/buy-a-home/agent-assistance</loc>
-      <changefreq>weekly</changefreq>
-      <priority>0.9</priority>
-   </url>
-   <url>
-      <loc>https://www.homehubng.com/blog</loc>
-      <changefreq>daily</changefreq>
-      <priority>0.7</priority>
-   </url>
-   <url>
-      <loc>https://www.homehubng.com/blog/market-insights</loc>
-      <changefreq>daily</changefreq>
-      <priority>0.7</priority>
-   </url>
-   <url>
-      <loc>https://www.homehubng.com/blog/tips-advice</loc>
-      <changefreq>daily</changefreq>
-      <priority>0.7</priority>
-   </url>
-   <url>
-      <loc>https://www.homehubng.com/blog/success-stories</loc>
-      <changefreq>daily</changefreq>
-      <priority>0.7</priority>
-   </url>
-   <url>
-      <loc>https://www.homehubng.com/contact</loc>
-      <changefreq>monthly</changefreq>
-      <priority>0.6</priority>
-   </url>
-   <url>
-      <loc>https://www.homehubng.com/contact/contact-form</loc>
-      <changefreq>monthly</changefreq>
-      <priority>0.6</priority>
-   </url>
-   <url>
-      <loc>https://www.homehubng.com/contact/office-locations</loc>
-      <changefreq>monthly</changefreq>
-      <priority>0.6</priority>
-   </url>
-   <url>
-      <loc>https://www.homehubng.com/contact/phone-email</loc>
-      <changefreq>monthly</changefreq>
-      <priority>0.6</priority>
-   </url>
-   <url>
-      <loc>https://www.homehubng.com/faqs</loc>
-      <changefreq>monthly</changefreq>
-      <priority>0.5</priority>
-   </url>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://www.homehubng.com/</loc>
+  <lastmod>2024-08-03T13:35:58+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://www.homehubng.com/login</loc>
+  <lastmod>2024-08-03T13:35:58+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.homehubng.com/registration-process-statement</loc>
+  <lastmod>2024-08-03T13:35:58+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.homehubng.com/terms-and-conditions</loc>
+  <lastmod>2024-08-03T13:35:58+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.homehubng.com/services-fee-agreement</loc>
+  <lastmod>2024-08-03T13:35:58+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.homehubng.com/privacy-policy</loc>
+  <lastmod>2024-08-03T13:35:58+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.homehubng.com/signup</loc>
+  <lastmod>2024-08-03T13:35:58+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+
+
 </urlset>`;
 
 export const siteMaps = (req, res) => {
