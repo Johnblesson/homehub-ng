@@ -37,7 +37,7 @@ router.get("/sitemap.xml", siteMaps)
 // Logout route
 router.get('/logout', (req, res) => {
     req.session.destroy();
-    res.redirect('/login'); 
+    res.redirect('/'); 
 });
 
 // 404 Route

@@ -58,6 +58,7 @@ router.get("/apartment-detail-admin/:id",ensureAuthenticated, cacheMiddleware, a
 
 // router.get('/properties', properties);
 
+
 // search for apartments
 router.get("/search", searchApartment)
 router.get("/search-admin", searchApartmentAdmin)

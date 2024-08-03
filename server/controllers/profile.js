@@ -21,6 +21,7 @@ export const profile = async (req, res) => {
       title: "User Profile",
       description: "This is the user's profile page.",
     };
+    
 
     // Render the profile page with the user data
     res.render("profile", {

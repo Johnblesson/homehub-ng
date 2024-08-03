@@ -39,6 +39,7 @@
             <tr>
                 <th>AID</th>
                 <th>Created by</th>
+                <th>role</th>
                 <th>Title</th>
                 <th>Phone No.</th>
                 <th>Location</th>
@@ -53,8 +54,9 @@
             <tbody>
                 <% apartments.forEach(apartment => { %>
             <tr>
-                <td class="hover role-green-bg">AID<%= apartment.aid %></td>
+                <td class="hover role-green-bg">AID<%= apartment.aid %></td> 
                 <td class="hover"><%= apartment.createdBy %></td>
+                <td class="hover"><%= apartment.role %></td>
                 <td class="hover"><%= apartment.title %></td>
                 <td class="hover role-pink-bg"><%= apartment.phone %></td>
                 <td class="hover role-green-bg"><%= apartment.location %></td>

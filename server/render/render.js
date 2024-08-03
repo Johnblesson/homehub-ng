@@ -516,7 +516,6 @@ const getTimeOfDay = () => {
   }
 };
 
-
 // User Page
 export const allusers = async (req, res) => {
   const locals = {
@@ -784,5 +783,41 @@ export const faqAdmin = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).send("An error occurred while fetching apartments.");
+  }
+};
+
+
+ // About Page
+ export const agentController = async (req, res) => {
+  const locals = {
+    title: "About Page",
+    description: "This is the about page of the System.",
+  };
+
+
+  // Function to determine the time of the day
+const getTimeOfDay = () => {
+  const currentHour = new Date().getHours();
+
+  if (currentHour >= 5 && currentHour < 12) {
+    return 'Good Morning';
+  } else if (currentHour >= 12 && currentHour < 18) {
+    return 'Good Afternoon';
+  } else {
+    return 'Good Evening';
+  }
+};
+  try {
+    const user = req.isAuthenticated() ? req.user : null;
+    const role = user ? user.role : null; // Get user role if user is authenticated
+
+     // Determine the time of the day
+    const greeting = getTimeOfDay();
+
+    // Render the index page with the receptions and latestStorage data
+    res.render('agent-page', { locals, user, greeting, role });
+  } catch (error) {
+    console.error('Error rendering the page:', error);
+    res.status(500).send('Internal Server Error');
   }
 };

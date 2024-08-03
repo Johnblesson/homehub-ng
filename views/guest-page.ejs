@@ -61,6 +61,58 @@
 
         <ul class="header-top-list">
 
+          <!-- <li>
+            <a href="mailto:info@homeverse.com" class="header-top-link">
+              <ion-icon name="mail-outline"></ion-icon>
+
+              <span>info@homeverse.com</span>
+            </a>
+          </li> -->
+
+          <li>
+            <a href="#" class="header-top-link">
+              <!-- <ion-icon name="location-outline"></ion-icon> -->
+
+              <span><%= greeting %>, <a class="header-top-link" href="/signup">You're logged in as Guest!  Signup</a> </span>
+            </a>
+          </li>
+
+        </ul>
+
+        <div class="wrapper">
+          <ul class="header-top-social-list">
+
+             <!-- Add Sierra Leone Flag -->
+             <li>
+              <a href="#" class="header-top-social-link">
+                <img src="./images/ng.png" alt="nigeria" style="width: 20px; height: 20px; border-radius: 50%;">
+              </a>
+            </li>
+
+            <!-- <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-facebook"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-twitter"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-instagram"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="header-top-social-link">
+                <ion-icon name="logo-pinterest"></ion-icon>
+              </a>
+            </li> -->
+
           </ul>
           <form action="/login" method="get">
           <button class="header-top-btn">
@@ -74,6 +126,10 @@
 
     <div class="header-bottom">
       <div class="container">
+
+        <!-- <a href="/home" class="logo">
+          <img style="width: 50%;" src="./images/hub.jpg" alt="Homeverse logo">
+        </a> -->
 
         <a href="/" class="logo">
           <img src="./images/hub.png" alt="Homehub logo">
@@ -112,7 +168,7 @@
               <li>
                 <a href="/login" class="navbar-link" data-nav-link>Service</a>
               </li>
-              <!-- 
+<!-- 
               <li>
                 <a href="/blog" class="navbar-link" data-nav-link>Blog</a>
               </li> -->
@@ -134,10 +190,22 @@
             <span>Search</span>
           </button>
 
+          <!-- <button class="header-bottom-actions-btn" aria-label="Profile">
+            <ion-icon name="person-outline"></ion-icon>
+
+            <span>Profile</span>
+          </button> -->
+
           <a href="/login" class="header-bottom-actions-btn" aria-label="Profile">
             <ion-icon name="person-outline"></ion-icon>
             <span>Profile</span>
           </a>
+
+          <!-- <button class="header-bottom-actions-btn" aria-label="Cart">
+            <ion-icon name="cart-outline"></ion-icon>
+
+            <span>Cart</span>
+          </button> -->
 
           <a href="/login" class="header-bottom-actions-btn" aria-label="Home">
             <ion-icon name="home-outline"></ion-icon>
@@ -260,7 +328,7 @@
   
           At HomeHub Agency, we understand the importance of finding a place that feels like home. That’s why we go above and beyond to deliver exceptional service, from the initial consultation to the final handshake. Experience the difference with HomeHub Agency, where your home journey begins. 
         </p>
-        <a href="/login" class="btn">Our Apartments</a>
+        <a href="/login" class="btn">Our Services</a>
       </div>
     </div>
   </section>
