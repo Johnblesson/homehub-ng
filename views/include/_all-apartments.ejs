@@ -41,6 +41,7 @@
                 <th>Created by</th>
                 <th>role</th>
                 <th>Title</th>
+                <th>Price</th>
                 <th>Phone No.</th>
                 <th>Location</th>
                 <th>Address</th>
@@ -48,7 +49,6 @@
                 <th>Negotiation</th>
                 <!-- <th>Availability</th> -->
                 <th>Verification</th>
-                <th>Sponsored</th>
                 <th>Actions</th> <!-- New column for actions -->
             </tr>
             </thead>
@@ -58,7 +58,14 @@
                 <td class="hover role-green-bg">AID<%= apartment.aid %></td> 
                 <td class="hover"><%= apartment.createdBy %></td>
                 <td class="hover"><%= apartment.role %></td>
-                <td class="hover"><%= apartment.title %></td>
+                <td class="hover">
+                    <% if (apartment.title && apartment.title.length > 20) { %>
+                        <%= apartment.title.substring(0, 20) + "..." %>
+                    <% } else { %>
+                        <%= apartment.title %>
+                    <% } %>
+                </td>
+                <td class="hover role-pink-bg"><%= apartment.currency %> <%= apartment.price.toLocaleString('en-US', { maximumFractionDigits: 2 }) %></td>
                 <td class="hover role-pink-bg"><%= apartment.phone %></td>
                 <td class="hover role-green-bg"><%= apartment.location %></td>
                 <td class="hover"><%= apartment.address %></td>
@@ -66,9 +73,6 @@
                 <td class="hover"><%= apartment.negotiation %></td>
                 <td class="hover <%= apartment.verification === 'verified' ? 'status-green-bg' : (apartment.verification === 'not verified' ? 'status-red-bg' : '') %>"> 
                     <%= apartment.verification %>
-                </td>
-                <td class="hover <%= apartment.sponsored === 'true' ? 'sponsored-blue-bg' : (apartment.sponsored === 'false' ? 'sponsored-grey-bg' : 'status-default-bg') %>"> 
-                    <%= apartment.sponsored %>
                 </td>
                 <td class="hover px-6 py-4 whitespace-nowrap">
                     <!-- Add icons with links to your delete, view, and update routes -->

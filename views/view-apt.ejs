@@ -54,7 +54,7 @@
 
 <div class="container mt-5 mx-auto">
     <div class="d-flex justify-content-between flex-wrap flex-md nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2"><%= apartment.aid %> <%= apartment.location %></h1>
+      <a href="/apartment-detail-admin/<%= apartment._id %>"><h1 class="h2"><%= apartment.aid %> <%= apartment.location %></h1></a>
       <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group me-2">
             <button id="shareBtn" type="button" onclick="window.print()" class="btn btn-sm btn-outline-secondary">Share as PDF</button>
@@ -96,6 +96,12 @@
             </div>
         </li>
         <li class="list-group-item"> 
+          <div class="row">
+              <div class="col" style="max-width: 140px"> <b>Title:</b></div>
+              <div class="col"><%= apartment.title %></div>
+          </div>
+      </li>
+        <li class="list-group-item"> 
             <div class="row">
                 <div class="col" style="max-width: 140px"> <b>Type of Property:</b></div>
                 <div class="col"><%= apartment.typeOfProperty %></div>
@@ -103,14 +109,14 @@
           </li>
         <li class="list-group-item"> 
             <div class="row">
-                <div class="col" style="max-width: 140px"> <b>Fullname</b></div>
+                <div class="col" style="max-width: 140px"> <b>Created By:</b></div>
                 <div class="col"><%= apartment.createdBy %></div>
             </div>
         </li>
         <li class="list-group-item"> 
           <div class="row">
               <div class="col" style="max-width: 140px"> <b>Price:</b></div>
-              <div class="col"><%= apartment.price %></div>
+              <div class="col"><%= apartment.currency %> <%= apartment.price.toLocaleString('en-US', { maximumFractionDigits: 2 }) %></div>
           </div>
       </li>
     
@@ -141,8 +147,8 @@
 </li>
 <li class="list-group-item"> 
   <div class="row">
-      <div class="col" style="max-width: 140px"> <b>Area:</b></div>
-      <div class="col"><%= apartment.area %></div>
+      <div class="col" style="max-width: 140px"> <b>State:</b></div>
+      <div class="col"><%= apartment.state %></div>
   </div>
 </li>
 <li class="list-group-item"> 
