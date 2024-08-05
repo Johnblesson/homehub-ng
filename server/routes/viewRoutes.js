@@ -73,7 +73,7 @@ router.get("/faq", cacheMiddleware, ensureAuthenticated, faq)
 
 router.get("/faq-admin", cacheMiddleware, ensureAuthenticated, isAdmin, faqAdmin)
 
-router.get("/agent-program", cacheMiddleware, ensureAuthenticated, agentController)
+router.get("/external-agent-program", cacheMiddleware, ensureAuthenticated, agentController)
 
 router.get("/signup", cacheMiddleware, (req, res) => {
     res.render("signup")    
