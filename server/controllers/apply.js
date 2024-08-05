@@ -1,5 +1,6 @@
 import Apartments from "../models/apartments.js";
 import Application from "../models/apply.js";
+import Boost from "../models/boost.js";
 import Staffs from "../models/staffs.js";
 import { io } from '../../server.js'; // Import the io instance
 
@@ -269,5 +270,188 @@ export const updateApplication = async (req, res) => {
   } catch (error) {
     console.error('Error updating Applications record:', error);
     res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+
+
+// Get application
+// export const applyForSponsorship = async (req, res) => {
+
+//   // Function to determine the time of the day
+//   const getTimeOfDay = () => {
+//     const currentHour = new Date().getHours();
+
+//     if (currentHour >= 5 && currentHour < 12) {
+//       return 'Good Morning';
+//     } else if (currentHour >= 12 && currentHour < 18) {
+//       return 'Good Afternoon';
+//     } else {
+//       return 'Good Evening';
+//     }
+//   };
+
+//   try {
+//     // Get the apartment ID and location from the query parameters
+//     const apartmentId = req.query.aid;
+//     const location = req.query.location;
+
+//     // Fetch the apartment details based on the ID
+//     const apartment = await Apartments.findOne({ _id: req.params.id });
+
+//     // Determine the time of the day
+//     const greeting = getTimeOfDay();
+
+//     // Check if the user is authenticated
+//     const user = req.isAuthenticated() ? req.user : null;
+
+//     const role = user.role;
+
+//     // Render the apply page with the necessary data
+//     res.render('apply-sponsor', {
+//       user,
+//       greeting,
+//       apartment,
+//       aid: apartmentId,
+//       location: location,
+//       role,
+//     });
+//   } catch (error) {
+//     console.error('Error rendering the page:', error);
+//     res.status(500).send('Internal Server Error');
+//   }
+// };
+
+
+export const applyForSponsorship = async (req, res) => {
+
+  // Function to determine the time of the day
+  const getTimeOfDay = () => {
+    const currentHour = new Date().getHours();
+
+    if (currentHour >= 5 && currentHour < 12) {
+      return 'Good Morning';
+    } else if (currentHour >= 12 && currentHour < 18) {
+      return 'Good Afternoon';
+    } else {
+      return 'Good Evening';
+    }
+  };
+
+  try {
+    // Get the apartment ID and location from the query parameters
+    const apartmentId = req.query.aid;
+    const location = req.query.location;
+
+    // Fetch the apartment details based on the ID
+    const apartment = await Apartments.findOne({ _id: req.params.id });
+
+    // Determine the time of the day
+    const greeting = getTimeOfDay();
+
+    // Check if the user is authenticated
+    const user = req.isAuthenticated() ? req.user : null;
+
+    const role = user ? user.role : null;
+
+    // Render the apply page with the necessary data
+    res.render('apply-sponsor', {
+      user,
+      greeting,
+      apartment,
+      aid: apartmentId,
+      location: location,
+      role,
+    });
+  } catch (error) {
+    console.error('Error rendering the page:', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
+
+
+// adminApplyForSponsorship
+
+
+export const adminApplyForSponsorship = async (req, res) => {
+
+  // Function to determine the time of the day
+  const getTimeOfDay = () => {
+    const currentHour = new Date().getHours();
+
+    if (currentHour >= 5 && currentHour < 12) {
+      return 'Good Morning';
+    } else if (currentHour >= 12 && currentHour < 18) {
+      return 'Good Afternoon';
+    } else {
+      return 'Good Evening';
+    }
+  };
+
+  try {
+    // Get the apartment ID and location from the query parameters
+    const apartmentId = req.query.aid;
+    const location = req.query.location;
+
+    // Fetch the apartment details based on the ID
+    const apartment = await Apartments.findOne({ _id: req.params.id });
+
+    // Determine the time of the day
+    const greeting = getTimeOfDay();
+
+    // Check if the user is authenticated
+    const user = req.isAuthenticated() ? req.user : null;
+
+    const role = user ? user.role : null;
+
+    // Render the apply page with the necessary data
+    res.render('apply-sponsor-admin', {
+      user,
+      greeting,
+      apartment,
+      aid: apartmentId,
+      location: location,
+      role,
+    });
+  } catch (error) {
+    console.error('Error rendering the page:', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
+
+
+
+// Controller function to create a new boost
+export const createBoost = async (req, res) => {
+  try {
+    // Extracting data from request body
+    const { phone, location, applyAid, username, address, address2, createdBy, comments, assignedStaff, staffInCharge } = req.body;
+
+    // Create a new Boost object with form data
+    const boostForm = new Boost({
+      phone,
+      location,
+      username,
+      applyAid,
+      address,
+      address2,
+      createdBy,
+      comments,
+      createdAt: new Date(), // Assuming createdAt and updatedAt are Date objects
+      updatedAt: new Date()
+    });
+
+    // Saving the boost-apartment to the database
+    const savedboost = await boostForm.save();
+
+    // Emit a new Application notification to all connected clients
+    // io.emit('new-application', { createdBy: savedApplication.createdBy, applyAid: savedApplication.applyAid, location: savedApplication.location });
+
+    // Sending a success response
+    res.status(201).render('success/boost')
+    console.log(savedboost);
+  } catch (error) {
+    // Sending an error response
+    res.status(400).json({ error: error.message });
   }
 };
