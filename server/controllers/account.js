@@ -18,6 +18,7 @@ export const createExpenses = async (req, res) => {
         username,  
         comments } = req.body;
   
+        
       // Create a new Expenses object with form data
       const expensesForm = new Expenses({
         date,

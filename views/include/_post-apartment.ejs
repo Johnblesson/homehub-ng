@@ -71,12 +71,12 @@
 
       <div class="formbold-mb-3">
         <label for="phone" class="formbold-form-label"> Phone: </label>
-        <input type="text" name="phone" id="phone" placeholder="Phone number" class="formbold-form-input" />
+        <input type="text" name="phone" id="phone" placeholder="Phone number" class="formbold-form-input" required/>
       </div>
 
       <div class="formbold-mb-3">
         <label for="area" class="formbold-form-label"> State: </label>
-        <select id="area" name="area" class="formbold-form-input">
+        <select id="area" name="state" class="formbold-form-input">
           <option value="" disabled selected hidden>Select State</option>
           <option value="Abia">Abia</option>
           <option value="Adamawa">Adamawa</option>
@@ -122,13 +122,13 @@
 
       <div class="formbold-mb-3">
         <label for="location" class="formbold-form-label"> Location: </label>
-        <input type="text" name="location" id="location" placeholder="Location" class="formbold-form-input" />
+        <input type="text" name="location" id="location" placeholder="Location" class="formbold-form-input" required/>
       </div>
 
       <div class="formbold-input-flex">
         <div>
           <label for="bedrooms" class="formbold-form-label"> Bedrooms: </label>
-          <input type="number" name="bedrooms" id="bedrooms" placeholder="Bedrooms" class="formbold-form-input" />
+          <input type="number" name="bedrooms" id="bedrooms" placeholder="Bedrooms" class="formbold-form-input" required/>
         </div>
         <div>
           <label for="bathrooms" class="formbold-form-label"> Bathrooms: </label>
@@ -154,6 +154,10 @@
       <div class="formbold-mb-3">
         <label for="createdBy" class="formbold-form-label"> Created By: </label>
         <input type="text" name="createdBy" value="<%= user.fullname %>" class="formbold-form-input" readonly />
+      </div>
+
+      <div class="formbold-mb-3">
+        <input type="hidden" name="role" value="<%= user.role %>" class="formbold-form-input"/>
       </div>
 
       <div class="formbold-mb-3">

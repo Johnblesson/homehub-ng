@@ -134,7 +134,7 @@ export const createApartment = async (req, res) => {
       photo1: photo1.location, // Use S3 URL
       photo2: photo2.location, // Use S3 URL
       phone: req.body.phone,
-      area: req.body.area,
+      state: req.body.state,
       address: req.body.address,
       address2: req.body.address2,
       negotiation: req.body.negotiation,

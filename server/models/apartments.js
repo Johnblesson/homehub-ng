@@ -49,11 +49,9 @@ const apartmentSchema = new mongoose.Schema({
     },
     bathrooms: {
         type: Number,
-        required: true,
     },
-    area: {
+    state: {
         type: String,
-        required: true,
     },
     phone: {
         type: Number,
@@ -109,4 +107,3 @@ apartmentSchema.virtual('formattedPrice').get(function() {
 const Apartments = mongoose.model('apartments', apartmentSchema);
 
 export default Apartments;
-

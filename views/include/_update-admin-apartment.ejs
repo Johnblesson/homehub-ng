@@ -162,25 +162,15 @@
         </div>
       </div>
 
-      <div class="formbold-mb-3 formbold-input-wrapp">
-        <label for="location" class="formbold-form-label"> Location: </label>
+      <div class="formbold-mb-3">
+        <label for="state" class="formbold-form-label"> State: </label>
+        <input type="text" name="state" id="state" value="<%= apartment.state %>" class="formbold-form-input" />
+      </div>
+      
 
-        <div>
-          <select id="area" class="formbold-form-input" name="area">
-            <option value="" disabled selected hidden>Select Area</option>
-            <option value="Western Area Urban" <%= apartment.area === 'Western Area Urban' ? 'selected' : '' %>>Western Area Urban</option>
-            <option value="Western Area Rural" <%= apartment.area === 'Western Area Rural' ? 'selected' : '' %>>Western Area Rural</option>
-            <option value="Others" <%= apartment.area !== 'Western Area Urban' && apartment.area !== 'Western Area Rural' ? 'selected' : '' %>>Others</option>
-          </select>          
-        </select>
-          <input
-            type="text"
-            name="location"
-            id="location"
-            value="<%= apartment.location %>"
-            class="formbold-form-input"
-          />
-        </div>
+      <div class="formbold-mb-3">
+        <label for="location" class="formbold-form-label"> Location: </label>
+        <input type="text" name="location" id="location" value="<%= apartment.location %>" class="formbold-form-input" />
       </div>
 
       <div class="formbold-input-flex">

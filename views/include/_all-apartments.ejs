@@ -44,8 +44,9 @@
                 <th>Phone No.</th>
                 <th>Location</th>
                 <th>Address</th>
+                <th>State</th>
                 <th>Negotiation</th>
-                <th>Availability</th>
+                <!-- <th>Availability</th> -->
                 <th>Verification</th>
                 <th>Sponsored</th>
                 <th>Actions</th> <!-- New column for actions -->
@@ -61,8 +62,8 @@
                 <td class="hover role-pink-bg"><%= apartment.phone %></td>
                 <td class="hover role-green-bg"><%= apartment.location %></td>
                 <td class="hover"><%= apartment.address %></td>
+                <td class="hover"><%= apartment.state %></td>
                 <td class="hover"><%= apartment.negotiation %></td>
-                <td class="hover"><%= apartment.availabilty %></td>
                 <td class="hover <%= apartment.verification === 'verified' ? 'status-green-bg' : (apartment.verification === 'not verified' ? 'status-red-bg' : '') %>"> 
                     <%= apartment.verification %>
                 </td>
