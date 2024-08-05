@@ -98,6 +98,14 @@
             });
         });
 
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const socket = io();
+
+            socket.on('new-application', (data) => {
+                alert(`New application created: ${data.createdBy} applied for property ${data.applyAid} at ${data.location}`);
+            });
+        });
+
     // One signal code
   // window.OneSignalDeferred = window.OneSignalDeferred || [];
   //   OneSignalDeferred.push(async function(OneSignal) {

@@ -1,6 +1,7 @@
 import Apartments from "../models/apartments.js";
 import Application from "../models/apply.js";
 import Staffs from "../models/staffs.js";
+import { io } from '../../server.js'; // Import the io instance
 
 // Controller function to create a new application
 export const createApplication = async (req, res) => {
@@ -26,6 +27,9 @@ export const createApplication = async (req, res) => {
 
     // Saving the application to the database
     const savedApplication = await applicationForm.save();
+
+    // Emit a new Application notification to all connected clients
+    io.emit('new-application', { createdBy: savedApplication.createdBy, applyAid: savedApplication.applyAid, location: savedApplication.location });
 
     // Sending a success response
     res.status(201).render('success/application')
@@ -179,7 +183,6 @@ export const application = async (req, res) => {
       aid: apartmentId,
       location: location,
       role,
-      manager,
     });
   } catch (error) {
     console.error('Error rendering the page:', error);

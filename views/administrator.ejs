@@ -51,6 +51,34 @@
       }
 
       </style>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+        <script>
+          // Socket.io code
+            document.addEventListener('DOMContentLoaded', (event) => {
+                const socket = io();
+    
+                socket.on('new-apartment', (data) => {
+                    alert(`New apartment created: ${data.title} at ${data.location}`);
+                });
+            });
+    
+            document.addEventListener('DOMContentLoaded', (event) => {
+                const socket = io();
+    
+                socket.on('new-application', (data) => {
+                    alert(`New application created: ${data.createdBy} applied for property ${data.applyAid} at ${data.location}`);
+                });
+            });
+    
+        // One signal code
+      // window.OneSignalDeferred = window.OneSignalDeferred || [];
+      //   OneSignalDeferred.push(async function(OneSignal) {
+      //     await OneSignal.init({
+      //       appId: "7ed5629e-e9e9-4c3c-91f5-a9f0c076fecb",
+      //     });
+      //   });
+        </script>
   </head>
   <body>
     <div class="grid-container">
