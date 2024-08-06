@@ -13,31 +13,6 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://www.homehubng.com/login</loc>
-  <lastmod>2024-08-03T13:35:58+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.homehubng.com/registration-process-statement</loc>
-  <lastmod>2024-08-03T13:35:58+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.homehubng.com/terms-and-conditions</loc>
-  <lastmod>2024-08-03T13:35:58+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.homehubng.com/services-fee-agreement</loc>
-  <lastmod>2024-08-03T13:35:58+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.homehubng.com/privacy-policy</loc>
-  <lastmod>2024-08-03T13:35:58+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
   <loc>https://www.homehubng.com/signup</loc>
   <lastmod>2024-08-03T13:35:58+00:00</lastmod>
   <priority>0.64</priority>
