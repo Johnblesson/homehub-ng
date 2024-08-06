@@ -1,7 +1,7 @@
 import { Router } from "express";
 const router = Router();
 
-import { signUp, logIn, edituser, updateUser, deleteUser, viewChangePwdPage, changePassword, googleAuthCallback, googleAuth, getSudoOnly, getAdminOnly, goBack, deleteUserAccount } from "../controllers/auth.js";
+import { signUp, logIn, edituser, updateUser, deleteUser, viewChangePwdPage, changePassword, googleAuthCallback, googleAuth, getSudoOnly, getAdminOnly, goBack, deleteUserAccount, activeUserSessions } from "../controllers/auth.js";
 import { getLoginPage } from "../controllers/auth.js";
 import { siteMaps } from "../render/sitemap.js"
 import upload from "../upload/upload.js";
@@ -18,6 +18,8 @@ router.post("/signup", upload.single("photo"), signUp);
 router.post("/login", logIn);
 
 router.get("/login", cacheMiddleware, getLoginPage);
+
+router.get("/active-sessions", ensureAuthenticated, isAdmin, activeUserSessions)
 
 router.get("/edit-user/:id", ensureAuthenticated, isAdmin, edituser);
 router.patch("/edit-user/:id", ensureAuthenticated, isAdmin, checkManagerMiddleware, updateUser)

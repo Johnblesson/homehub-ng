@@ -7,6 +7,7 @@ import { body, validationResult } from 'express-validator';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import passport from '../passport/passport-config.js';
+import { activeSessions } from '../passport/passport-config.js'
 import dotenv from 'dotenv';
 import axios from 'axios';
 dotenv.config();
@@ -102,53 +103,8 @@ export const googleAuthCallback = passport.authenticate('google', {
   successRedirect: '/'
 });
 
-//   // Login Controller
-// export const logIn = (req, res, next) => {
-//   passport.authenticate('local', async (err, user, info) => {
-//     try {
-//       if (err) {
-//         return next(err);
-//       }
 
-//       if (!user) {
-//         return res.status(400).json({ msg: info.message });
-//       }
-
-//       // Check if user status is active
-//       if (user.status === 'active') {
-//         // User is active, proceed with login
-//         req.login(user, async (loginErr) => {
-//           if (loginErr) {
-//             return next(loginErr);
-//           }
-
-//           // Create a JWT token
-//           const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '24h' });
-//           delete user.password;
-//           req.session.user = user;
-//           console.log(token);
-//           res.cookie('token', token, { httpOnly: true });
-
-//           // Check the role and render different views
-//           if (user.role === 'admin') {
-//             res.redirect('/admin-home');
-//           } else if (user.role === 'user') {
-//             res.redirect('/home');
-//           } else {
-//             res.redirect('/home');
-//           }
-//         });
-//       } else {
-//         // User status is inactive, send forbidden response
-//         res.status(403).json({ msg: 'Forbidden: User status is inactive.' });
-//       }
-//     } catch (catchErr) {
-//       res.status(500).json({ error: catchErr.message });
-//     }
-//   })(req, res, next);
-// };
-
-
+// Login controller
 export const logIn = (req, res, next) => {
   passport.authenticate('local', async (err, user, info) => {
     try {
@@ -198,6 +154,30 @@ export const logIn = (req, res, next) => {
 };
 
 
+// Active session
+export const activeUserSessions = async (req, res) => {
+  try {
+    const users = await User.find({ '_id': { $in: Array.from(activeSessions) } });
+
+    const page = parseInt(req.query.page) || 1; // Get the requested page number from the query parameter
+    const limit = 15; // Number of entries per page
+    const skip = (page - 1) * limit;
+
+    // Fetch all storage data
+    // const allStorage = await User.find().skip(skip).limit(limit);
+    const totalEntries = await User.countDocuments();
+
+    const totalPages = Math.ceil(totalEntries / limit);
+
+    const user = req.isAuthenticated() ? req.user : null;
+
+    // res.json(users);
+    res.render('active-sessions', { data: users, currentPage: page, totalPages: totalPages });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
 
 // Get Login Page Controller
 export const getLoginPage = (req, res) => {
@@ -213,45 +193,6 @@ export const getLoginPage = (req, res) => {
   res.render('login', {
   });
 }
-
-// Get Login Page Controller
-// const GEOLOCATION_API_URL = process.env.GEOLOCATION_API_URL;
-// const API_KEY = process.env.API_KEY;
-
-// // Function to check if the IP address is private
-// const isPrivateIP = (ip) => {
-//   const privateRanges = [
-//     /^10\./,
-//     /^172\.(1[6-9]|2[0-9]|3[0-1])\./,
-//     /^192\.168\./
-//   ];
-//   return privateRanges.some((range) => range.test(ip));
-// };
-
-// export const getLoginPage = async (req, res) => {
-//   const ip =
-//     req.headers['cf-connecting-ip'] ||
-//     req.headers['x-real-ip'] ||
-//     req.headers['x-forwarded-for'] ||
-//     req.socket.remoteAddress || '';
-
-//   const timestamp = new Date().toISOString();
-//   console.log('IP address:', ip, '/', timestamp);
-
-//   try {
-//     if (ip && !isPrivateIP(ip)) {
-//       const response = await axios.get(`${GEOLOCATION_API_URL}/${ip}?access_key=${API_KEY}`);
-//       const locationData = response.data;
-//       console.log('Location Data:', locationData);
-//     } else {
-//       console.log('Skipping geolocation for private IP address:', ip);
-//     }
-//   } catch (error) {
-//     console.error('Error fetching location data:', error);
-//   }
-
-//   res.render('login', {});
-// };
 
 
 

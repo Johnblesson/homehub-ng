@@ -1,11 +1,14 @@
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
-import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import bcrypt from 'bcrypt';
 import User from '../models/auth.js'; // Adjust the path based on your project structure
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
 dotenv.config();
 
+// In-memory store for active sessions
+const activeSessions = new Set();
+
+// Local Strategy
 passport.use(new LocalStrategy(
   async (username, password, done) => {
     try {
@@ -28,41 +31,13 @@ passport.use(new LocalStrategy(
   }
 ));
 
-passport.use(new GoogleStrategy({
-  clientID: process.env.GOOGLE_CLIENT_ID,
-  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: '/auth/google/callback'
-}, async (token, tokenSecret, profile, done) => {
-  try {
-    let user = await User.findOne({ googleId: profile.id });
-
-    if (!user) {
-      user = new User({
-        googleId: profile.id,
-        fullname: profile.displayName,
-        username: profile.displayName.replace(/\s+/g, '').toLowerCase(), // Generate a username
-        email: profile.emails[0].value,
-        photo: profile.photos[0].value,   // Use the photo URL from the Google profile
-        password: 'default-password',     // Generate or set a default password, ensure to hash it if required
-        phone: '000-000-0000',            // Default phone number, you might want to handle this more appropriately
-        role: 'user',                     // Default role
-        status: 'active',                 // Default status
-        accountant: false,                // Default accountant status
-        sudo: false                       // Default sudo status
-      });
-      await user.save();
-    }
-
-    return done(null, user);
-  } catch (err) {
-    return done(err, null);
-  }
-}));
-
+// Serialize User
 passport.serializeUser((user, done) => {
   done(null, user._id);
+  activeSessions.add(user._id); // Add user to active sessions
 });
 
+// Deserialize User
 passport.deserializeUser(async (id, done) => {
   try {
     const user = await User.findById(id);
@@ -73,3 +48,4 @@ passport.deserializeUser(async (id, done) => {
 });
 
 export default passport;
+export { activeSessions };
