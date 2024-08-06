@@ -33,6 +33,29 @@
     padding: 16px;
   }
 
+/* Card Footer*/
+.card-footer-actions {
+      display: flex;
+      justify-content: space-around;
+      padding: 10px;
+    }
+    .card-footer-actions-btn {
+      display: flex;
+      align-items: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .card-footer-actions-btn ion-icon {
+      font-size: 24px;
+      margin-right: 5px;
+    }
+    .card-footer-actions-btn span {
+      font-size: 14px;
+    }
+/* Card Footer*/
+
+
   .card-footer {
     padding: 16px;
     border-top: 1px solid #ddd;
@@ -162,7 +185,7 @@
           </div>
           <div class="card-footer-actions">
             <!-- Action buttons (placeholders) -->
-            <button class="card-footer-actions-btn">
+            <!-- <button class="card-footer-actions-btn">
               <ion-icon name="resize-outline"></ion-icon>
             </button>
             <button class="card-footer-actions-btn">
@@ -170,6 +193,10 @@
             </button>
             <button class="card-footer-actions-btn">
               <ion-icon name="add-circle-outline"></ion-icon>
+            </button> -->
+            <button class="card-footer-actions-btn">
+              <ion-icon name="eye-outline"></ion-icon>
+              <span><%= apt.clicks %></span>
             </button>
           </div>
         </div> 
@@ -178,3 +205,7 @@
     </li>
   <% }); %>
 </ul>
+<!-- End of property list -->
+<link href="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons/ionicons.css" rel="stylesheet">
+<script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

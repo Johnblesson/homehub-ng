@@ -68,8 +68,8 @@ const apartmentSchema = new mongoose.Schema({
     },
     availabilty: {
         type: String,
-        enum: ['available', 'not available'],
-        default: 'available',
+        enum: ['Available', 'Not Available'],
+        default: 'Available',
     },
     verification: {
         type: String,
@@ -91,6 +91,10 @@ const apartmentSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    clicks: {
+    type: Number,
+    default: 0
+  },
     // Reference to the user who created the apartment
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, 
     createdAt: { type: Date, default: Date.now },

@@ -587,9 +587,10 @@ export const guestPage = async (req, res) => {
   }
 };
 
+
 // Controller to display a single apartment's details
 export const apartmentDetail = async (req, res) => {
-    const getTimeOfDay = () => {
+  const getTimeOfDay = () => {
     const currentHour = new Date().getHours();
     if (currentHour >= 5 && currentHour < 12) {
       return 'Good Morning';
@@ -599,6 +600,7 @@ export const apartmentDetail = async (req, res) => {
       return 'Good Evening';
     }
   };
+
   try {
     const { id } = req.params;
 
@@ -612,6 +614,10 @@ export const apartmentDetail = async (req, res) => {
     if (!apartment) {
       return res.status(404).send("Apartment not found");
     }
+
+    // Increment the clicks count
+    apartment.clicks = (apartment.clicks || 0) + 1;
+    await apartment.save();
 
     // Ensure photoUrls is set properly for the current apartment
     const updatedApartment = {
@@ -643,6 +649,7 @@ export const apartmentDetail = async (req, res) => {
   }
 };
 
+
 // Controller to display a single apartment's details
 export const adminApartmentDetail = async (req, res) => {
   const getTimeOfDay = () => {
@@ -668,6 +675,10 @@ try {
   if (!apartment) {
     return res.status(404).send("Apartment not found");
   }
+
+    // Increment the clicks count
+    apartment.clicks = (apartment.clicks || 0) + 1;
+    await apartment.save();
 
   // Ensure photoUrls is set properly for the current apartment
   const updatedApartment = {
