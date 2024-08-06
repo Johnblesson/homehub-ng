@@ -1,7 +1,21 @@
 import { Router } from "express";
 const router = Router();
 
-import { createApplication, getAllApplication, editApplication, deleteApplication, application, adminApplication, updateApplication, applyForSponsorship, adminApplyForSponsorship, createBoost } from "../controllers/apply.js";
+import { 
+    createApplication, 
+    getAllApplication, 
+    editApplication, 
+    deleteApplication, 
+    application, 
+    adminApplication, 
+    updateApplication, 
+    applyForSponsorship, 
+    adminApplyForSponsorship, 
+    createBoost, 
+    getAllBoost, 
+    editboost, 
+    updateboost 
+} from "../controllers/apply.js";
 import ensureAuthenticated from "../middlewares/auth.js";
 // import { checkSudoMiddleware } from '../middlewares/sudo.js'
 import { checkManagerMiddleware } from '../middlewares/manager.js'
@@ -19,7 +33,11 @@ router.get('/admin-application-form', ensureAuthenticated, adminApplication)
 router.patch('/update-admin-application/:id', ensureAuthenticated, isAdmin, updateApplication);
 
 router.post("/apply-boost", ensureAuthenticated, createBoost);
-router.get("/apply-for-sponsorship", applyForSponsorship);
-router.get("/admin-apply-for-sponsorship", adminApplyForSponsorship);
+router.get("/apply-for-sponsorship", ensureAuthenticated, applyForSponsorship);
+router.get("/admin-apply-for-sponsorship", ensureAuthenticated, isAdmin, adminApplyForSponsorship);
+
+router.get("/all-boost", ensureAuthenticated, isAdmin, getAllBoost);
+router.get("/edit-boost/:id", ensureAuthenticated, isAdmin, editboost);
+router.patch('/update-boost/:id', ensureAuthenticated, isAdmin, updateboost);
 
 export default router;

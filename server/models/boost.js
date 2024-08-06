@@ -9,6 +9,16 @@ const boostSchema = new mongoose.Schema({
     address2: String,
     createdBy : String,
     comments : String,
+    payment: {
+        type: Boolean,
+        default: false,
+    },
+    duration : String,
+    expiration: {
+        type: String,
+        enum: ['vaild', 'invaild'],
+        default: 'invaild',
+    },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
 }, {

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./css/success.css">
     <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
-    <title>Boost Success</title>
+    <title>Application Boost</title>
 
     <style>
         body {
@@ -50,39 +50,16 @@
 .add-another-reception a:hover {
     background-color: hsl(9, 91%, 57%);
 }
-
-/* a {
-    text-decoration: none;
-} */
-
-a {
-    text-decoration: none;
-    position: relative;
-}
-
-/* a::after {
-    content: 'Click me';
-    position: absolute;
-    top: 100%;
-    left: 0;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-} */
-
-a:hover::after {
-    opacity: 1;
-}
-
     </style>
 </head>
 <body>
     <div class="container">
         <div class="success-message">
-            <h1>Boost apartment submitted successfully!</h1>
-            <p>Your apartment will be boosted after you make payment. 
-                Proceed to payment: <a href="javascript:void(0)" onclick="openWhatsApp()">Pay Now</a></p>
-        </div>        
+            <h1>Boost Updated Successfully!</h1>
+            <p>This Apartment has been boosted successfully.</p>
+        </div>
         <div class="add-another-reception">
+            <!-- <a href="admin-home">Go Back</a> -->
             <a href="#" onclick="goBack()">Go Back</a>
         </div>
     </div>
@@ -92,12 +69,4 @@ a:hover::after {
         window.history.back();
     }
 </script>
-<script>
-    function openWhatsApp() {
-      const phoneNumber = '+23279969094'; 
-      const url = `https://wa.me/${phoneNumber}`;
-
-      window.open(url, '_blank');
-    }
-  </script>
 </html>
