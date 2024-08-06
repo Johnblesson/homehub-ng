@@ -14,7 +14,8 @@ import {
     createBoost, 
     getAllBoost, 
     editboost, 
-    updateboost 
+    updateboost,
+    deleteboost 
 } from "../controllers/apply.js";
 import ensureAuthenticated from "../middlewares/auth.js";
 // import { checkSudoMiddleware } from '../middlewares/sudo.js'
@@ -35,9 +36,10 @@ router.patch('/update-admin-application/:id', ensureAuthenticated, isAdmin, upda
 router.post("/apply-boost", ensureAuthenticated, createBoost);
 router.get("/apply-for-sponsorship", ensureAuthenticated, applyForSponsorship);
 router.get("/admin-apply-for-sponsorship", ensureAuthenticated, isAdmin, adminApplyForSponsorship);
-
 router.get("/all-boost", ensureAuthenticated, isAdmin, getAllBoost);
 router.get("/edit-boost/:id", ensureAuthenticated, isAdmin, editboost);
 router.patch('/update-boost/:id', ensureAuthenticated, isAdmin, updateboost);
+router.delete("/delete-boost/:id", ensureAuthenticated, isAdmin, checkManagerMiddleware, deleteboost);
+router.get("/delete-boost/:id", ensureAuthenticated, isAdmin, checkManagerMiddleware, deleteboost);
 
 export default router;

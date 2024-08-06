@@ -1,6 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
+import helmet from "helmet";
 import dotenv from "dotenv";
 import multer from "multer";
 import ejs from "ejs";
@@ -37,6 +38,7 @@ app.use(cookieParser());
 app.use(flash());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
+app.use(helmet());
 
 // Set the view engine to ejs
 const __filename = fileURLToPath(import.meta.url);
@@ -61,7 +63,12 @@ app.use(express.static('public', {
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: true,
+  cookie: { 
+    secure: true, 
+    httpOnly: true, 
+    sameSite: 'strict' 
+  }
 }))
 
 app.use(passport.initialize());
